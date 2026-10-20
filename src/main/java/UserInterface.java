@@ -17,9 +17,9 @@ public class UserInterface {
         while (running) {
             String choice = scanner.nextLine().trim();
             switch (choice) {
-                case "1" -> System.out.println("a");
+                case "1" -> addMovie();
                 case "2" -> System.out.println("a");
-                case "3" -> System.out.println("a");
+                case "3" -> searchMovies();
                 case "4" -> System.out.println("a");
                 case "5" -> System.out.println("a");
                 case "0" -> running = false;
@@ -27,5 +27,29 @@ public class UserInterface {
             }
 
         }
+    }
+
+    public void addMovie(){
+        System.out.print("Titel: ");
+        String title = scanner.nextLine();
+        System.out.print("Instruktør: ");
+        String director = scanner.nextLine();
+        System.out.print("Årstal: ");
+        int yearCreated = Integer.parseInt(scanner.nextLine());
+        System.out.print("i farver (Ja/Nej): ");
+        String inColor = scanner.nextLine();
+        boolean isColored;
+        isColored = inColor.equalsIgnoreCase("Ja");
+        System.out.print("Længde i minutter: ");
+        int lengthInMinutes = Integer.parseInt(scanner.nextLine());
+        System.out.print("Genre: ");
+        String genre = scanner.nextLine();
+        controller.addMovie(title, director, yearCreated, isColored, lengthInMinutes, genre);
+        startProgram();
+    }
+    public void searchMovies(){
+        System.out.print("Søg efter titel: ");
+        String searchText = scanner.nextLine();
+        System.out.println(controller.searchMovies(searchText));
     }
 }
