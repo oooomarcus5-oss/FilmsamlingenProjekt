@@ -15,7 +15,11 @@ public class MovieCollection {
         return null;
     }
     public int getNumberOfMovies(){
-        return 0;
+        int counter = 0;
+        for(Movie movie : movies){
+            counter++;
+        }
+        return counter;
     }
     public ArrayList<Movie> searchMovies(String searchText){
         ArrayList<Movie> matches = new ArrayList<>();
