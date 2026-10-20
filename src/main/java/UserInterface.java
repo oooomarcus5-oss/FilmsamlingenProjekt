@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -50,6 +51,10 @@ public class UserInterface {
     public void searchMovies(){
         System.out.print("Søg efter titel: ");
         String searchText = scanner.nextLine();
-        System.out.println(controller.searchMovies(searchText));
+        ArrayList<Movie> movies = controller.searchMovies(searchText);
+        for(Movie movie : movies){
+            System.out.println(movie.printMovie());
+        }
+
     }
 }

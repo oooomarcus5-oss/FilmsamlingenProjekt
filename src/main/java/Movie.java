@@ -5,6 +5,7 @@ public class Movie {
     private boolean inColor;
     private int lengthInMinutes;
     private String genre;
+    private String isColored;
 
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
         this.title = title;
@@ -50,6 +51,17 @@ public class Movie {
     }
     public String getGenre(){
         return genre;
+    }
+
+    public String printMovie(){
+        if(isInColor()){
+            isColored = "farvede";
+        }
+        else{
+            isColored = "sort/hvid";
+        }
+        return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored;
+
     }
 
 }

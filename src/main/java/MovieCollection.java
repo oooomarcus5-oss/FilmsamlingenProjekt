@@ -21,12 +21,12 @@ public class MovieCollection {
         }
         return counter;
     }
-    public ArrayList<String> searchMovies(String searchText){
-        ArrayList<String> matches = new ArrayList<>();
+    public ArrayList<Movie> searchMovies(String searchText){
+        ArrayList<Movie> matches = new ArrayList<>();
         String text = searchText.toLowerCase();
         for(Movie movie : movies){
             if(movie.getTitle().toLowerCase().contains(text)){
-                matches.add(movie.getTitle());
+                matches.add(movie);
             }
         }
         return matches;

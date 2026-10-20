@@ -8,7 +8,7 @@ public class Controller {
         collection.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
     }
 
-    public ArrayList<String> searchMovies(String searchText){
+    public ArrayList<Movie> searchMovies(String searchText){
         return collection.searchMovies(searchText);
     }
 
