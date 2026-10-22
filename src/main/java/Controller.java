@@ -11,6 +11,12 @@ public class Controller {
 
     public ArrayList<Movie> searchMovies(String searchText){ return collection.searchMovies(searchText);
     }
+
+    public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
+        return collection.editMovie(movie, title, director, yearCreated, inColor, lengthInMinutes, genre);
+
+    }
+
     public ArrayList<Movie> getMovies(){
         return collection.getMovies();
     }
