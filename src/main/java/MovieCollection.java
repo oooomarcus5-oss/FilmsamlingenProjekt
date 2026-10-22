@@ -12,7 +12,7 @@ public class MovieCollection {
     }
 
     public ArrayList<Movie> getMovies(){
-        return null;
+        return movies;
     }
     public int getNumberOfMovies(){
         int counter = 0;

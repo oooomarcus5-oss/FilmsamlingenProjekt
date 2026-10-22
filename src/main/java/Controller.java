@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Controller {
@@ -8,8 +9,9 @@ public class Controller {
         collection.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
     }
 
-    public ArrayList<Movie> searchMovies(String searchText){
-        return collection.searchMovies(searchText);
+    public ArrayList<Movie> searchMovies(String searchText){ return collection.searchMovies(searchText);
     }
-
+    public ArrayList<Movie> getMovies(){
+        return collection.getMovies();
+    }
 }
