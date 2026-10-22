@@ -12,4 +12,8 @@ public class Controller {
         return collection.searchMovies(searchText);
     }
 
+    public boolean deleteMovie(Movie movie){
+        return collection.deleteMovie(movie);
+    }
+
 }

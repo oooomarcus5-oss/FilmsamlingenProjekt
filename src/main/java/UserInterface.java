@@ -22,7 +22,7 @@ public class UserInterface {
                 case "2" -> System.out.println("a");
                 case "3" -> searchMovies();
                 case "4" -> System.out.println("a");
-                case "5" -> System.out.println("a");
+                case "5" -> deleteMovie();
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt kommando: " + choice);
             }
@@ -55,6 +55,19 @@ public class UserInterface {
         for(Movie movie : movies){
             System.out.println(movie.printMovie());
         }
+    }
 
+
+
+    public void deleteMovie(){
+        Movie movie = selectMovie();
+        if (movie == null){
+            return;
+        }
+        if(controller.deleteMovie(movie)){
+            System.out.println("\"" + movie.getTitle() + "\" er slettet");
+        } else {
+            System.out.println("Filmen kunne ikke slettes");
+        }
     }
 }
