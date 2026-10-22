@@ -55,7 +55,7 @@ public class Movie {
 
     public String printMovie(){
         if(isInColor()){
-            isColored = "farvede";
+            isColored = "farvet";
         }
         else{
             isColored = "sort/hvid";

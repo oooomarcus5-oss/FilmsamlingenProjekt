@@ -12,15 +12,13 @@ public class MovieCollection {
     }
 
     public ArrayList<Movie> getMovies(){
-        return null;
+        return movies;
     }
+
     public int getNumberOfMovies(){
-        int counter = 0;
-        for(Movie movie : movies){
-            counter++;
-        }
-        return counter;
+        return movies.size();
     }
+
     public ArrayList<Movie> searchMovies(String searchText){
         ArrayList<Movie> matches = new ArrayList<>();
         String text = searchText.toLowerCase();
@@ -31,11 +29,12 @@ public class MovieCollection {
         }
         return matches;
     }
+
     public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
         return false;
     }
+
     public boolean deleteMovie(Movie movie){
         return movies.remove(movie);
     }
-
 }
