@@ -83,6 +83,20 @@ public class UserInterface {
         if(movie == null){
             return;
         }
+        System.out.println("Lad feltet være tomt hvis det ikke skal ændres");
+
+        System.out.print("Titel: ");
+        String title = scanner.nextLine();
+        if (title.isEmpty()) title = movie.getTitle();
+
+        System.out.print("Instruktør: ");
+        String director = scanner.nextLine();
+        if (director.isEmpty()) director = movie.getDirector();
+
+        System.out.print("Årstal: ");
+        String year = scanner.nextLine();
+        int yearCreated = year.isEmpty() ? movie.getYearCreated() : Integer.parseInt(year);
+
     }
     private void showAllMovies() {
         ArrayList<Movie> movies = controller.getMovies();
