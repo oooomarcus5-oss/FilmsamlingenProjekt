@@ -87,15 +87,60 @@ public class UserInterface {
 
         System.out.print("Titel: ");
         String title = scanner.nextLine();
-        if (title.isEmpty()) title = movie.getTitle();
+        if (title.isEmpty()){
+            title = movie.getTitle();
+        }
 
         System.out.print("Instruktør: ");
         String director = scanner.nextLine();
-        if (director.isEmpty()) director = movie.getDirector();
+        if (director.isEmpty()){
+            director = movie.getDirector();
+        }
 
         System.out.print("Årstal: ");
         String year = scanner.nextLine();
-        int yearCreated = year.isEmpty() ? movie.getYearCreated() : Integer.parseInt(year);
+        int yearCreated;
+        if (year.isEmpty()) {
+            yearCreated = movie.getYearCreated();
+        } else {
+            yearCreated = Integer.parseInt(year);
+        }
+
+        System.out.print("i farver (Ja/Nej): ");
+        String color = scanner.nextLine();
+        boolean inColor;
+
+        if (color.isEmpty()) {
+            inColor = movie.isInColor();
+        } else {
+            inColor = color.equalsIgnoreCase("Ja");
+        }
+        System.out.print("Længde i minutter: ");
+        String length = scanner.nextLine();
+        int lengthInMinutes;
+
+        if (length.isEmpty()) {
+            lengthInMinutes = movie.getLengthInMinutes();
+        } else {
+            lengthInMinutes = Integer.parseInt(length);
+        }
+
+        System.out.print("Genre: ");
+        String genre = scanner.nextLine();
+        if (genre.isEmpty()) {
+            genre = movie.getGenre();
+        }
+
+        boolean success = controller.editMovie(
+                movie, title, director, yearCreated,
+                inColor, lengthInMinutes, genre
+        );
+
+        if (success) {
+            System.out.println("Filmen er blevet redigeret.");
+        } else {
+            System.out.println("Filmen kunne ikke redigeres.");
+        }
 
     }
     private void showAllMovies() {
