@@ -12,4 +12,8 @@ public class Controller {
         return collection.searchMovies(searchText);
     }
 
+    public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
+        return collection.editMovie(movie, title, director, yearCreated, inColor, lengthInMinutes, genre);
+    }
+
 }

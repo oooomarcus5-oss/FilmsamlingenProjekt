@@ -21,7 +21,7 @@ public class UserInterface {
                 case "1" -> addMovie();
                 case "2" -> System.out.println("a");
                 case "3" -> searchMovies();
-                case "4" -> System.out.println("a");
+                case "4" -> editMovie();
                 case "5" -> System.out.println("a");
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt kommando: " + choice);
@@ -55,6 +55,32 @@ public class UserInterface {
         for(Movie movie : movies){
             System.out.println(movie.printMovie());
         }
+        if(movies.isEmpty()){
+            System.out.println("Ingen film matcher \"" + searchText + "\".");
+        }
+    }
 
+    public Movie selectMovie(){
+        System.out.println("Søg efter titel: ");
+        String searchText = scanner.nextLine();
+
+        ArrayList<Movie> movies = controller.searchMovies(searchText);
+        if(movies.isEmpty()){
+            System.out.println("Ingen film matcher \"" + searchText + "\".");
+            return null;
+        }
+        for(int i = 0; i < movies.size(); i++){
+            System.out.println((i + 1) + ". " + movies.get(i).printMovie());
+        }
+        System.out.println("Vælg et nummer: ");
+        int number = Integer.parseInt(scanner.nextLine());
+        return movies.get(number - 1);
+    }
+
+    public void editMovie(){
+        Movie movie = selectMovie();
+        if(movie == null){
+            return;
+        }
     }
 }
