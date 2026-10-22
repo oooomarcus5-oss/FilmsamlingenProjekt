@@ -8,18 +8,18 @@ public class UserInterface {
 
 
     public void startProgram() {
-        System.out.println("1. Opret en film");
-        System.out.println("2. Vis alle film");
-        System.out.println("3. Søg efter film");
-        System.out.println("4. Rediger en film");
-        System.out.println("5. Slet en film");
-        System.out.println("0. Afslut");
 
         while (running) {
+            System.out.println("1. Opret en film");
+            System.out.println("2. Vis alle film");
+            System.out.println("3. Søg efter film");
+            System.out.println("4. Rediger en film");
+            System.out.println("5. Slet en film");
+            System.out.println("0. Afslut");
             String choice = scanner.nextLine().trim();
             switch (choice) {
                 case "1" -> addMovie();
-                case "2" -> System.out.println("a");
+                case "2" -> showAllMovies();
                 case "3" -> searchMovies();
                 case "4" -> System.out.println("a");
                 case "5" -> deleteMovie();
@@ -46,12 +46,13 @@ public class UserInterface {
         System.out.print("Genre: ");
         String genre = scanner.nextLine();
         controller.addMovie(title, director, yearCreated, isColored, lengthInMinutes, genre);
-        startProgram();
+
     }
     public void searchMovies(){
         System.out.print("Søg efter titel: ");
         String searchText = scanner.nextLine();
         ArrayList<Movie> movies = controller.searchMovies(searchText);
+
         for(Movie movie : movies){
             System.out.println(movie.printMovie());
         }
@@ -70,4 +71,17 @@ public class UserInterface {
             System.out.println("Filmen kunne ikke slettes");
         }
     }
+    private void showAllMovies() {
+        ArrayList<Movie> movies = controller.getMovies();
+
+        if (movies.isEmpty()) {
+            System.out.println("Der er ingen film i samlingen endnu.");
+        } else {
+            for (Movie movie : movies) {
+                System.out.println(movie.printMovie());
+                System.out.println("-----------------");
+            }
+        }
+    }
 }
+
