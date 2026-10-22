@@ -20,4 +20,7 @@ public class Controller {
     public ArrayList<Movie> getMovies(){
         return collection.getMovies();
     }
+    public boolean deleteMovie(Movie movie){
+        return collection.deleteMovie(movie);
+    }
 }
