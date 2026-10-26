@@ -99,8 +99,5 @@ public class Movie {
     public long getDaysSinceWatched(LocalDate today){
         return ChronoUnit.DAYS.between(lastWatched, today);
     }
-    public LocalDate getLastWatched(){
-        return lastWatched;
-    }
 
 }
