@@ -10,15 +10,12 @@ public class MovieCollection {
     public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
         movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
     }
-
     public ArrayList<Movie> getMovies(){
         return movies;
     }
-
     public int getNumberOfMovies(){
         return movies.size();
     }
-
     public ArrayList<Movie> searchMovies(String searchText){
         ArrayList<Movie> matches = new ArrayList<>();
         String text = searchText.toLowerCase();
@@ -29,7 +26,6 @@ public class MovieCollection {
         }
         return matches;
     }
-
     public boolean editMovie(Movie movie, String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
         if (!movies.contains(movie)){
             return false;
@@ -42,8 +38,6 @@ public class MovieCollection {
         movie.setGenre(genre);
         return true;
     }
-
-
     public boolean deleteMovie(Movie movie){
         return movies.remove(movie);
     }

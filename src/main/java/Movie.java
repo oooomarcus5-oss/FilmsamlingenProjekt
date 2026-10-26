@@ -1,8 +1,6 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import java.time.LocalDate;
-
 public class Movie {
     private String title;
     private String director;
@@ -71,13 +69,25 @@ public class Movie {
     }
 
     public String printMovie() {
+        String isColored;
         if (isInColor()) {
-            isColored = "farvet";
+            isColored = "farver";
         } else {
-            isColored = "sort/hvid";
+            isColored = "sort-hvid";
         }
-        return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored;
 
+        String lastWatchedText;
+        if (!hasBeenWatched()) {
+            lastWatchedText = "Sidst set: aldrig";
+        } else {
+            lastWatchedText = "";   // den tager vi næste gang
+        }
+
+        return getTitle() + " (" + getYearCreated() + ")" +
+                "\n" + getDirector() +
+                "\n" + getGenre() +
+                "\n" + getLengthInMinutes() + " Minutter, " + isColored +
+                "\n" + lastWatchedText;
     }
     public boolean hasBeenWatched(){
         return lastWatched != null;
