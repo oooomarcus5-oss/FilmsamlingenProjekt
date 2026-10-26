@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
-    Scanner scanner = new Scanner(System.in);
-    Controller controller = new Controller();
+    private Scanner scanner = new Scanner(System.in);
+    private Controller controller = new Controller();
     private boolean running = true;
 
     public void startProgram() {
