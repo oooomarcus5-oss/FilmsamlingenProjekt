@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import java.time.LocalDate;
+
 public class Movie {
     private String title;
     private String director;
@@ -78,10 +80,16 @@ public class Movie {
         } else {
             isColored = "sort/hvid";
         }
-        return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored;
+        String watchedInfo;
+        if(lastWatched != null){
+            watchedInfo = "Sidst set: " + lastWatched;
+        }
+        else{
+            watchedInfo = "Ikke set før";
+        }
+        return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored + "\n" + watchedInfo;
 
     }
-
     public boolean hasBeenWatched(){
         return lastWatched != null;
     }
@@ -90,6 +98,9 @@ public class Movie {
     }
     public long getDaysSinceWatched(LocalDate today){
         return ChronoUnit.DAYS.between(lastWatched, today);
+    }
+    public LocalDate getLastWatched(){
+        return lastWatched;
     }
 
 }
