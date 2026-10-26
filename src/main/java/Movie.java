@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import java.time.LocalDate;
+
 public class Movie {
     private String title;
     private String director;
@@ -77,6 +79,7 @@ public class Movie {
         return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored;
 
     }
+    private LocalDate lastWatched;
 
     public boolean hasBeenWatched(){
         return lastWatched != null;
