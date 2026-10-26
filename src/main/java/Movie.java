@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class Movie {
     private String title;
     private String director;
@@ -6,8 +9,9 @@ public class Movie {
     private int lengthInMinutes;
     private String genre;
     private String isColored;
+    private LocalDate lastWatched;
 
-    public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre){
+    public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
         this.title = title;
         this.director = director;
         this.yearCreated = yearCreated;
@@ -16,52 +20,72 @@ public class Movie {
         this.genre = genre;
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         this.title = title;
     }
-    public String getTitle(){
+
+    public String getTitle() {
         return title;
     }
-    public void setDirector(String director){
+
+    public void setDirector(String director) {
         this.director = director;
     }
-    public String getDirector(){
+
+    public String getDirector() {
         return director;
     }
-    public void setYearCreated(int yearCreated){
+
+    public void setYearCreated(int yearCreated) {
         this.yearCreated = yearCreated;
     }
-    public int getYearCreated(){
+
+    public int getYearCreated() {
         return yearCreated;
     }
-    public void setInColor(boolean inColor){
+
+    public void setInColor(boolean inColor) {
         this.inColor = inColor;
     }
-    public boolean isInColor(){
+
+    public boolean isInColor() {
         return inColor;
     }
-    public void setLengthInMinutes(int lengthInMinutes){
+
+    public void setLengthInMinutes(int lengthInMinutes) {
         this.lengthInMinutes = lengthInMinutes;
     }
-    public int getLengthInMinutes(){
+
+    public int getLengthInMinutes() {
         return lengthInMinutes;
     }
-    public void setGenre(String genre){
+
+    public void setGenre(String genre) {
         this.genre = genre;
     }
-    public String getGenre(){
+
+    public String getGenre() {
         return genre;
     }
 
-    public String printMovie(){
-        if(isInColor()){
+    public String printMovie() {
+        if (isInColor()) {
             isColored = "farvet";
-        }
-        else{
+        } else {
             isColored = "sort/hvid";
         }
         return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored;
 
+    }
+
+    public boolean hasBeenWatched(){
+        return lastWatched != null;
+    }
+    public void markAsWatched(LocalDate date){
+        lastWatched = date;
+    }
+    public long getDaysSinceWatched(LocalDate today){
+        return ChronoUnit.DAYS.between(lastWatched, today);
     }
 
 }
