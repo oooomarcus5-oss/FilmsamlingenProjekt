@@ -76,7 +76,14 @@ public class Movie {
         } else {
             isColored = "sort/hvid";
         }
-        return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored;
+        String watchedInfo;
+        if(lastWatched != null){
+            watchedInfo = "Sidst set: " + lastWatched;
+        }
+        else{
+            watchedInfo = "Ikke set før";
+        }
+        return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored + "\n" + watchedInfo;
 
     }
     public boolean hasBeenWatched(){
