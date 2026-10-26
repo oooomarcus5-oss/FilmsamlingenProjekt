@@ -82,10 +82,12 @@ public class Movie {
         }
         String watchedInfo;
         if(lastWatched != null){
-            watchedInfo = "Sidst set: " + lastWatched;
+            LocalDate today = LocalDate.now();
+            long days = ChronoUnit.DAYS.between(lastWatched, today);
+            watchedInfo = "Sidst set: " + days + " dage siden" + lastWatched;
         }
         else{
-            watchedInfo = "Ikke set før";
+            watchedInfo = "Sidst set: Aldrig";
         }
         return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored + "\n" + watchedInfo;
 
