@@ -79,8 +79,6 @@ public class Movie {
         return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored;
 
     }
-    private LocalDate lastWatched;
-
     public boolean hasBeenWatched(){
         return lastWatched != null;
     }
