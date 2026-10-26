@@ -20,6 +20,10 @@ public class Movie {
         this.genre = genre;
     }
 
+    public LocalDate getLastWatched(){
+        return lastWatched;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
