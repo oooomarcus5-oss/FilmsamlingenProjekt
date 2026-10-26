@@ -14,6 +14,8 @@ public class UserInterface {
             System.out.println("3. Søg efter film");
             System.out.println("4. Rediger en film");
             System.out.println("5. Slet en film");
+            System.out.println("6. Marker en film som set i dag");
+            System.out.println("7. Find film, du ikke har set længe");
             System.out.println("0. Afslut");
 
             String choice = scanner.nextLine().trim();
@@ -24,6 +26,8 @@ public class UserInterface {
                 case "3" -> searchMovies();
                 case "4" -> editMovie();
                 case "5" -> deleteMovie();
+                case "6" -> markAsWatched();
+                case "7" -> findMovieSinceDays();
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt kommando: " + choice);
             }
@@ -185,5 +189,11 @@ public class UserInterface {
                 System.out.println("-----------------");
             }
         }
+    }
+    public void findMovieSinceDays(){
+
+    }
+    public void markAsWatched(){
+
     }
 }
