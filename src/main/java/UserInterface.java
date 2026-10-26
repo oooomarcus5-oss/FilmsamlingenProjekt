@@ -191,7 +191,19 @@ public class UserInterface {
         }
     }
     public void findMovieSinceDays(){
+        System.out.print("Hvor mange dage siden mindst? ");
+        String input = scanner.nextLine();
+        int days = Integer.parseInt(input);
+        ArrayList<Movie> movies = controller.getMoviesNotWatchedForDays(days);
 
+        if (movies.isEmpty()) {
+            System.out.println("Der er ingen film i samlingen endnu.");
+        } else {
+            for (Movie movie : movies) {
+                System.out.println(movie.printMovie());
+                System.out.println("-----------------");
+            }
+        }
     }
     public void markAsWatched(){
 
