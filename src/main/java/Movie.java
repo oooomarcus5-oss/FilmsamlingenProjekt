@@ -84,7 +84,7 @@ public class Movie {
         if(lastWatched != null){
             LocalDate today = LocalDate.now();
             long days = ChronoUnit.DAYS.between(lastWatched, today);
-            watchedInfo = "Sidst set: " + days + " dage siden" + lastWatched;
+            watchedInfo = "Sidst set: " + days + " dage siden " + lastWatched;
         }
         else{
             watchedInfo = "Sidst set: Aldrig";

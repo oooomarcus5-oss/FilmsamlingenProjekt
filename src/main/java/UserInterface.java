@@ -206,6 +206,13 @@ public class UserInterface {
         }
     }
     public void markAsWatched(){
+        Movie movie = selectMovie();
+
+        if (movie == null) {
+            return;
+        }
+        controller.markAsWatched(movie);
+        System.out.println(movie.getTitle() + " er markeret som set");
 
     }
 }
