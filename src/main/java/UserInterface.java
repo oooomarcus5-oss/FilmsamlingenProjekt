@@ -7,6 +7,16 @@ public class UserInterface {
     private Controller controller = new Controller();
     private boolean running = true;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private String readNonEmpty(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty()) {
+                return input;
+            }
+            System.out.println("Feltet må ikke være tomt. Prøv igen.");
+        }
+    }
 
     public void startProgram() {
         while (running) {
@@ -37,18 +47,12 @@ public class UserInterface {
     }
 
     public void addMovie() {
-        System.out.print("Titel: ");
-        String title = scanner.nextLine();
-
-        System.out.print("Instruktør: ");
-        String director = scanner.nextLine();
-
+        String title = readNonEmpty("Titel: ");
+        String director = readNonEmpty("Instruktør: ");
         int yearCreated = readInt("Årstal: ");
         boolean inColor = readYesNo("i farver (Ja/Nej): ");
         int lengthInMinutes = readInt("Længde i minutter: ");
-
-        System.out.print("Genre: ");
-        String genre = scanner.nextLine();
+        String genre = readNonEmpty("Genre: ");
 
         controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
     }
