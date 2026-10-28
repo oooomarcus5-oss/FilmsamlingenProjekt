@@ -30,7 +30,8 @@ public class UserInterface {
                 case "6" -> markAsWatched();
                 case "7" -> findMovieSinceDays();
                 case "0" -> running = false;
-                default -> System.out.println("Ukendt kommando: " + choice);
+                default -> System.out.println("Vælg et nr fra listen\n" + choice + " er ikke på listen");
+
             }
         }
     }
