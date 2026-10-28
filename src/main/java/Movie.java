@@ -1,7 +1,6 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-
-import java.time.LocalDate;
 
 public class Movie {
     private String title;
@@ -10,8 +9,7 @@ public class Movie {
     private boolean inColor;
     private int lengthInMinutes;
     private String genre;
-    private String isColored;
-    private LocalDate lastWatched;
+    private LocalDate lastWatched;   // null = filmen er aldrig set
 
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
         this.title = title;
@@ -20,10 +18,6 @@ public class Movie {
         this.inColor = inColor;
         this.lengthInMinutes = lengthInMinutes;
         this.genre = genre;
-    }
-
-    public LocalDate getLastWatched(){
-        return lastWatched;
     }
 
     public void setTitle(String title) {
@@ -74,32 +68,44 @@ public class Movie {
         return genre;
     }
 
-    public String printMovie() {
-        if (isInColor()) {
-            isColored = "farvet";
-        } else {
-            isColored = "sort/hvid";
-        }
-        String watchedInfo;
-        if(lastWatched != null){
-            LocalDate today = LocalDate.now();
-            long days = ChronoUnit.DAYS.between(lastWatched, today);
-            watchedInfo = "Sidst set: " + days + " dage siden " + lastWatched;
-        }
-        else{
-            watchedInfo = "Sidst set: Aldrig";
-        }
-        return getTitle() + " " + "(" + getYearCreated() + ") " + "\n" + getDirector() + "\n" + getGenre() + "\n" + getLengthInMinutes() + " Minutter, " + isColored + "\n" + watchedInfo;
-
+    public LocalDate getLastWatched() {
+        return lastWatched;
     }
-    public boolean hasBeenWatched(){
+
+    public boolean hasBeenWatched() {
         return lastWatched != null;
     }
-    public void markAsWatched(LocalDate date){
+
+    public void markAsWatched(LocalDate date) {
         lastWatched = date;
     }
-    public long getDaysSinceWatched(LocalDate today){
+
+    // Må kun kaldes, hvis hasBeenWatched() er true
+    public long getDaysSinceWatched(LocalDate today) {
         return ChronoUnit.DAYS.between(lastWatched, today);
     }
 
+    public String printMovie() {
+        String isColored;
+        if (isInColor()) {
+            isColored = "farver";
+        } else {
+            isColored = "sort-hvid";
+        }
+
+        String lastWatchedText;
+        if (!hasBeenWatched()) {
+            lastWatchedText = "Sidst set: aldrig";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            lastWatchedText = "Sidst set: " + lastWatched.format(formatter)
+                    + " (for " + getDaysSinceWatched(LocalDate.now()) + " dage siden)";
+        }
+
+        return getTitle() + " (" + getYearCreated() + ")" +
+                "\n" + getDirector() +
+                "\n" + getGenre() +
+                "\n" + getLengthInMinutes() + " Minutter, " + isColored +
+                "\n" + lastWatchedText;
+    }
 }
