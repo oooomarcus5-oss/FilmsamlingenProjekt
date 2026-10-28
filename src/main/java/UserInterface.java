@@ -189,7 +189,7 @@ public class UserInterface {
             if (number >= 1 && number <= movies.size()) {
                 return movies.get(number - 1);
             }
-            System.out.println("Vælg et tal mellem 1 og " + movies.size() + "eller 0 for at fortryde.");
+            System.out.println("Vælg et tal mellem 1 og " + movies.size() + " eller 0 for at fortryde.");
         }
     }
 
