@@ -9,7 +9,7 @@ public class Movie {
     private boolean inColor;
     private int lengthInMinutes;
     private String genre;
-    private LocalDate lastWatched;   // null = filmen er aldrig set
+    private LocalDate lastWatched; // null = filmen er aldrig set
 
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
         this.title = title;
