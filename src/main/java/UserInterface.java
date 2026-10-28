@@ -183,7 +183,7 @@ public class UserInterface {
             int number = readInt("Vælg nummer (0 for at fortryde): ");
 
             if (number == 0) {
-                System.out.println("fortrudt");
+                System.out.println("Fortrudt.");
                 return null;
             }
             if (number >= 1 && number <= movies.size()) {
