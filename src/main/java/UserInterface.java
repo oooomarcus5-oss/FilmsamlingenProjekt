@@ -182,12 +182,13 @@ public class UserInterface {
             int number = readInt("Vælg nummer (0 for at fortryde): ");
 
             if (number == 0) {
+                System.out.println("fortrudt");
                 return null;
             }
             if (number >= 1 && number <= movies.size()) {
                 return movies.get(number - 1);
             }
-            System.out.println("Nummeret er ikke på listen. Prøv igen.");
+            System.out.println("Vælg et tal mellem 1 og " + movies.size() + "eller 0 for at fortryde.");
         }
     }
 
