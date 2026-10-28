@@ -45,10 +45,7 @@ public class UserInterface {
 
         int yearCreated = readInt("Årstal: ");
 
-        System.out.print("i farver (Ja/Nej): ");
-        String inColor = scanner.nextLine();
-        boolean isColored;
-        isColored = inColor.equalsIgnoreCase("Ja");
+        boolean isColored = readYesNo("i farver (ja/nej)");
 
         int lengthInMinutes = readInt("Længde i minutter: ");
 
@@ -222,6 +219,19 @@ public class UserInterface {
             }
         }
     }
+    private boolean readYesNo(String prompt){
+        while (true){
+            System.out.println(prompt);
+            String input = scanner.nextLine().trim();
+            if (input.equalsIgnoreCase("ja") || input.equalsIgnoreCase("j")){
+                return true;
+            }
+            if (input.equalsIgnoreCase("nej") || input.equalsIgnoreCase("n")){
+                return false;
+            }
+            System.out.println("Svar enten Ja eller Nej:");
+        }
+    }
     private String lastWatchedText(Movie movie) {
         if (!movie.hasBeenWatched()) {
             return "aldrig";
@@ -229,4 +239,5 @@ public class UserInterface {
         long days = controller.getDaysSinceWatched(movie);
         return movie.getLastWatched().format(dateFormatter) + " (for " + days + " dage siden)";
     }
+
 }
