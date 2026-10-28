@@ -35,4 +35,7 @@ public class Controller {
         LocalDate limit = LocalDate.now().minusDays(days);
         return collection.getMoviesNotWatchedSince(limit);
     }
+    public long getDaysSinceWatched(Movie movie) {
+        return movie.getDaysSinceWatched(LocalDate.now());
+    }
 }

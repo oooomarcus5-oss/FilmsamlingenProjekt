@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 
 public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
     private Controller controller = new Controller();
     private boolean running = true;
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public void startProgram() {
 
@@ -41,16 +43,14 @@ public class UserInterface {
         System.out.print("Instruktør: ");
         String director = scanner.nextLine();
 
-        System.out.print("Årstal: ");
-        int yearCreated = Integer.parseInt(scanner.nextLine());
+        int yearCreated = readInt("Årstal: ");
 
         System.out.print("i farver (Ja/Nej): ");
         String inColor = scanner.nextLine();
         boolean isColored;
         isColored = inColor.equalsIgnoreCase("Ja");
 
-        System.out.print("Længde i minutter: ");
-        int lengthInMinutes = Integer.parseInt(scanner.nextLine());
+        int lengthInMinutes = readInt("Længde i minutter: ");
 
         System.out.print("Genre: ");
         String genre = scanner.nextLine();
@@ -89,8 +89,7 @@ public class UserInterface {
             System.out.println((i + 1) + ". " + movies.get(i).printMovie());
         }
 
-        System.out.print("Vælg nummer: ");
-        int number = Integer.parseInt(scanner.nextLine());
+        int number = readInt("Vælg nummer: ");
 
         return movies.get(number - 1);
     }
@@ -191,17 +190,15 @@ public class UserInterface {
         }
     }
     public void findMovieSinceDays(){
-        System.out.print("Hvor mange dage siden mindst? ");
-        String input = scanner.nextLine();
-        int days = Integer.parseInt(input);
+        int days = readInt("Hvor mange dage siden mindst? ");
         ArrayList<Movie> movies = controller.getMoviesNotWatchedForDays(days);
 
         if (movies.isEmpty()) {
-            System.out.println("Der er ingen film i samlingen endnu.");
+            System.out.println("Ingen film er urørt i " + days + " dage eller mere.");
         } else {
             for (Movie movie : movies) {
-                System.out.println(movie.printMovie());
-                System.out.println("-----------------");
+                System.out.println(movie.getTitle() + " – sidst set: " + lastWatchedText(movie));
+
             }
         }
     }
@@ -213,6 +210,23 @@ public class UserInterface {
         }
         controller.markAsWatched(movie);
         System.out.println(movie.getTitle() + " er markeret som set");
-
+    }
+    private int readInt(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("\"" + input + "\" er ikke et helt tal. Prøv igen.");
+            }
+        }
+    }
+    private String lastWatchedText(Movie movie) {
+        if (!movie.hasBeenWatched()) {
+            return "aldrig";
+        }
+        long days = controller.getDaysSinceWatched(movie);
+        return movie.getLastWatched().format(dateFormatter) + " (for " + days + " dage siden)";
     }
 }
