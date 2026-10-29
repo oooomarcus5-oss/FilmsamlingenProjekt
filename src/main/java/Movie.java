@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Movie {
+    private static final int FIRST_MOVIE_YEAR = 1888;
     private String title;
     private String director;
     private int yearCreated;
@@ -21,6 +22,9 @@ public class Movie {
     }
 
     public void setTitle(String title) {
+        if (title == null || title.isBlank()){
+            throw new IllegalArgumentException("Titlen må ikke være tom.");
+        }
         this.title = title;
     }
 
@@ -29,6 +33,9 @@ public class Movie {
     }
 
     public void setDirector(String director) {
+        if (director == null || director.isBlank()){
+            throw new IllegalArgumentException("Instruktøren må ikke være tom.");
+        }
         this.director = director;
     }
 
@@ -61,6 +68,9 @@ public class Movie {
     }
 
     public void setGenre(String genre) {
+        if (genre == null || genre.isBlank()){
+            throw new IllegalArgumentException("Genren må ikke være tom.");
+        }
         this.genre = genre;
     }
 
