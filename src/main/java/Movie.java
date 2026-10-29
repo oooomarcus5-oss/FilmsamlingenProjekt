@@ -13,12 +13,12 @@ public class Movie {
     private LocalDate lastWatched; // null = filmen er aldrig set
 
     public Movie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
-        this.title = title;
-        this.director = director;
-        this.yearCreated = yearCreated;
-        this.inColor = inColor;
-        this.lengthInMinutes = lengthInMinutes;
-        this.genre = genre;
+        setTitle(title);
+        setDirector(director);
+        setYearCreated(yearCreated);
+        setInColor(inColor);
+        setLengthInMinutes(lengthInMinutes);
+        setGenre(genre);
     }
 
     public void setTitle(String title) {
@@ -44,6 +44,10 @@ public class Movie {
     }
 
     public void setYearCreated(int yearCreated) {
+        int latestYear = LocalDate.now().getYear() + 1;
+        if (yearCreated < FIRST_MOVIE_YEAR || yearCreated > latestYear){
+            throw new IllegalArgumentException("Årstallet skal være mellem " + FIRST_MOVIE_YEAR +  " og " + latestYear + ".");
+        }
         this.yearCreated = yearCreated;
     }
 
@@ -60,6 +64,9 @@ public class Movie {
     }
 
     public void setLengthInMinutes(int lengthInMinutes) {
+        if (lengthInMinutes < 1){
+            throw new IllegalArgumentException("Filmen skal være mindst 1 minut lang.");
+        }
         this.lengthInMinutes = lengthInMinutes;
     }
 
