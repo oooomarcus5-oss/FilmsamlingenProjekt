@@ -55,8 +55,14 @@ public class UserInterface {
         int lengthInMinutes = readInt("Længde i minutter: ");
         String genre = readNonEmpty("Genre: ");
 
-        controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
+        try {
+            controller.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
+            System.out.println(title + " er tilføjet til samlingen.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Filmen blev ikke oprettet: " + e.getMessage());
+        }
     }
+
 
     public void showAllMovies() {
         ArrayList<Movie> movies = controller.getMovies();
@@ -117,14 +123,16 @@ public class UserInterface {
         if (genre.isEmpty()) {
             genre = movie.getGenre();
         }
-
-        boolean success = controller.editMovie(movie, title, director, yearCreated,
-                inColor, lengthInMinutes, genre);
-
-        if (success) {
-            System.out.println("Filmen er blevet redigeret.");
-        } else {
-            System.out.println("Filmen kunne ikke redigeres.");
+        try {
+            boolean success = controller.editMovie(movie, title, director, yearCreated,
+                    inColor, lengthInMinutes, genre);
+            if (success) {
+                System.out.println("Filmen er blevet redigeret.");
+            } else {
+                System.out.println("Filmen kunne ikke redigeres.");
+            }
+        } catch (IllegalArgumentException e){
+            System.out.println("Filmen blev ikke redigeret: " + e.getMessage());
         }
     }
 
