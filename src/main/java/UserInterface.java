@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -171,8 +173,9 @@ public class UserInterface {
             return;
         }
 
-        controller.markAsWatched(movie);
-        System.out.println(movie.getTitle() + " er markeret som set");
+        LocalDate date = readDate("Dato (dd-mm-åååå, Enter for i dag): ");
+        controller.markAsWatched(movie, date);
+        System.out.println(movie.getTitle() + " er markeret som set den " + date.format(dateFormatter));
     }
 
     public void findMovieSinceDays() {
@@ -300,6 +303,20 @@ public class UserInterface {
             }
         } catch(FileNotFoundException e){
             System.out.println("Der er ingen gemt filmsamling endnu - du starter med en tom samling");
+        }
+    }
+    private LocalDate readDate(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                return LocalDate.now();
+            }
+            try {
+                return LocalDate.parse(input, dateFormatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("\"" + input + "\" er ikke en gyldig dato. Skriv den som dd-mm-åååå.");
+            }
         }
     }
 }
