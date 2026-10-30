@@ -4,15 +4,18 @@ import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class FileHandler {
     private static final String HEADER = "title;director;yearCreated;inColor;lengthInMinutes;genre;lastWatched";
     private String fileName;
+    private int skippedLineCount = 0;
 
     public FileHandler(String fileName){
+        this.fileName = fileName;
     }
 
-    public void saveMovie(ArrayList<Movie> movies) throws FileNotFoundException {
+    public void saveMovies(ArrayList<Movie> movies) throws FileNotFoundException {
         PrintStream output = new PrintStream(new File(fileName));
         output.println(HEADER);
         for(Movie movie : movies){
@@ -54,6 +57,30 @@ public class FileHandler {
         catch(DateTimeParseException e){
             return null;
         }
+    }
+
+    public int getSkippedLineCount(){
+        return skippedLineCount;
+    }
+
+    public ArrayList<Movie> loadMovies() throws FileNotFoundException {
+        ArrayList<Movie> movies = new ArrayList<>();
+        Scanner fileScanner = new Scanner(new File(fileName));
+        fileScanner.nextLine();
+
+        while(fileScanner.hasNextLine()){
+            String line = fileScanner.nextLine();
+
+            Movie movie = parseMovie(line);
+            if(movie != null){
+                movies.add(movie);
+            }
+            if(movie == null){
+                skippedLineCount++;
+            }
+        }
+        fileScanner.close();
+        return movies;
     }
 
 }

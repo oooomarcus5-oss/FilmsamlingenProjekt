@@ -53,11 +53,15 @@ public class MovieCollection {
 
     public ArrayList<Movie> getMoviesNotWatchedSince(LocalDate date) {
         ArrayList<Movie> matches = new ArrayList<>();
-        for (Movie movie : movies ){
-        if (!movie.hasBeenWatched() || movie.getLastWatched().isBefore(date)){
-            matches.add(movie);
-        }
+        for (Movie movie : movies) {
+            if (!movie.hasBeenWatched() || movie.getLastWatched().isBefore(date)) {
+                matches.add(movie);
+            }
         }
         return matches;
+    }
+
+    public void addMovie(Movie movie){
+        movies.add(movie);
     }
 }

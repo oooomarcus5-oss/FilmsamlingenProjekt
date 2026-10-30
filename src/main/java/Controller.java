@@ -1,10 +1,13 @@
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller {
     MovieCollection collection = new MovieCollection();
+    FileHandler fileHandler = new FileHandler("test.txt");
 
+    private boolean changed;
 
     public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
         collection.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
@@ -35,7 +38,34 @@ public class Controller {
         LocalDate limit = LocalDate.now().minusDays(days);
         return collection.getMoviesNotWatchedSince(limit);
     }
+
     public long getDaysSinceWatched(Movie movie) {
         return movie.getDaysSinceWatched(LocalDate.now());
     }
+
+    public boolean getChanged(){
+        return changed;
+    }
+    public void setChanged(boolean setChanged){
+        this.changed = setChanged;
+    }
+
+    public boolean saveMoviesIfChanged() throws FileNotFoundException {
+        if(!changed){
+            return false;
+        }
+        fileHandler.saveMovies(collection.getMovies());
+        changed = false;
+        return true;
+    }
+
+    public int loadMovies() throws FileNotFoundException {
+        ArrayList<Movie> movies = fileHandler.loadMovies();
+        for(Movie movie : movies){
+            collection.addMovie(movie);
+        }
+        return movies.size();
+    }
+
 }
+
