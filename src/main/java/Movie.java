@@ -94,6 +94,9 @@ public class Movie {
     }
 
     public void markAsWatched(LocalDate date) {
+        if (date.isAfter(LocalDate.now())){
+            throw new IllegalArgumentException("Datoen kan ikke være i fremtiden");
+        }
         lastWatched = date;
     }
 

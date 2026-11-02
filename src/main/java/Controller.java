@@ -10,8 +10,8 @@ public class Controller {
     private boolean changed;
 
     public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
-        changed = true;
         collection.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
+        changed = true;
     }
 
     public ArrayList<Movie> searchMovies(String searchText) {
@@ -68,7 +68,6 @@ public class Controller {
         changed = false;
         return true;
     }
-
     public int loadMovies() throws FileNotFoundException {
         ArrayList<Movie> movies = fileHandler.loadMovies();
         for(Movie movie : movies){
@@ -76,10 +75,8 @@ public class Controller {
         }
         return movies.size();
     }
-
     public int getSkippedLineCount(){
         return fileHandler.getSkippedLineCount();
     }
-
 }
 

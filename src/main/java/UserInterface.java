@@ -172,9 +172,13 @@ public class UserInterface {
             return;
         }
 
-        LocalDate date = readDate("Dato (dd-mm-åååå, Enter for i dag): ");
-        controller.markAsWatched(movie, date);
-        System.out.println(movie.getTitle() + " er markeret som set den " + date.format(dateFormatter));
+     LocalDate date = readDate("Dato (dd-mm-åååå, Enter for i dag): ");
+        try {
+            controller.markAsWatched(movie, date);
+            System.out.println(movie.getTitle() + " er markeret som set den " + date.format(dateFormatter));
+        } catch (IllegalArgumentException e) {
+            System.out.println("filmen blev ikke markeret som set: " + e.getMessage());
+        }
     }
 
     public void findMovieSinceDays() {
