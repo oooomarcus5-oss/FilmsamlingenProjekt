@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
     private static final int FIRST_MOVIE_YEAR = 1888;
     private String title;
     private String director;
@@ -129,5 +129,9 @@ public class Movie {
                 "\n" + getGenre() +
                 "\n" + getLengthInMinutes() + " Minutter, " + isColored +
                 "\n" + lastWatchedText;
+    }
+    @Override
+    public int compareTo(Movie other) {
+        return title.compareToIgnoreCase(other.title);
     }
 }
