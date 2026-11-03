@@ -1,3 +1,8 @@
+package ui;
+
+import domainmodel.Controller;
+import domainmodel.Movie;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
