@@ -39,6 +39,7 @@ public class UserInterface {
             System.out.println("5. Slet en film");
             System.out.println("6. Marker en film som set");
             System.out.println("7. Find film, du ikke har set længe");
+            System.out.println("8. Vis film, sorter efter.");
             System.out.println("0. Afslut");
 
             String choice = scanner.nextLine().trim();
@@ -51,6 +52,7 @@ public class UserInterface {
                 case "5" -> deleteMovie();
                 case "6" -> markAsWatched();
                 case "7" -> findMovieSinceDays();
+                case "8" -> System.out.println("l");
                 case "0" -> running = false;
                 default -> System.out.println("Vælg et nr fra listen\n" + choice + " er ikke på listen");
 
@@ -88,18 +90,11 @@ public class UserInterface {
 
 
     public void showAllMovies() {
-        ArrayList<Movie> movies = controller.getMovies();
-
-        if (movies.isEmpty()) {
-            System.out.println("Der er ingen film i samlingen endnu.");
-        } else {
-            for (Movie movie : movies) {
-                System.out.println(movie.printMovie());
-                System.out.println("-----------------");
-            }
+        for (Movie movie : controller.getMoviesSortedByTitle()) {
+            System.out.println(movie.printMovie());
+            System.out.println();
         }
     }
-
     public void searchMovies() {
         System.out.print("Søg efter titel: ");
         String searchText = scanner.nextLine();

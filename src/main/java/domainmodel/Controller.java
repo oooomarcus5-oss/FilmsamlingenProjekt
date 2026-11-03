@@ -96,5 +96,8 @@ public class Controller {
             case GENRE -> new GenreComparator();
         };
     }
+    public ArrayList<Movie> getMoviesSortedByTitle() {
+        return collection.getMoviesSortedByTitle();
+    }
 }
 
