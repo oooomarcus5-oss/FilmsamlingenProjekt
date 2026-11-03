@@ -15,4 +15,6 @@
 | F | Givet at filen ikke findes (første gang programmet kører), så starter jeg med en tom samling – programmet går ikke ned. | Ja | US13 `ui.UserInterface.loadMovies`                |
 | F | Givet at en linje i filen er ødelagt, så springes den over, jeg får en advarsel, og resten af filmene indlæses. | Ja | US13 `Filehandler.loadMovies`                     |
 | P | Givet at jeg hverken har oprettet, rettet, slettet eller markeret en film som set, når jeg afslutter, så bliver filen ikke skrevet, og jeg får at vide, at der ikke var noget at gemme.  | Ja | US14 `domainmodel.Controller.saveMoviesIfChanged` |
-| P | Som udvikler vil jeg have koden delt i packages efter lag, så det er tydeligt, hvilke klasser der hører til brugerfladen, domænet og data – og så en ny udvikler hurtigt kan finde rundt..  | Ja | US15 `main`                                       |
+| P | Som udvikler vil jeg have koden delt i packages efter lag, så det er tydeligt, hvilke klasser der hører til brugerfladen, domænet og data – og så en ny udvikler hurtigt kan finde rundt.  | Ja | US15 `main`                                       |
+| F | Som filmentusiast vil jeg se mine film i alfabetisk orden, så jeg hurtigt kan finde en bestemt film i listen.  | Ja | US16 `controller.getMoviesSortedByTitle()`        |
+| F | Som filmentusiast vil jeg selv kunne vælge, hvad filmene sorteres efter, så jeg kan se samlingen på den måde, der passer mig lige nu.  | Ja | US17 `MovieCollection.getMoviesSorted()`          |

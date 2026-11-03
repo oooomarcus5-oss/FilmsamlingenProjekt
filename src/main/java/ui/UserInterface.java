@@ -2,6 +2,7 @@ package ui;
 
 import domainmodel.Controller;
 import domainmodel.Movie;
+import domainmodel.SortField;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -52,7 +53,7 @@ public class UserInterface {
                 case "5" -> deleteMovie();
                 case "6" -> markAsWatched();
                 case "7" -> findMovieSinceDays();
-                case "8" -> System.out.println("l");
+                case "8" -> sortAfter();
                 case "0" -> running = false;
                 default -> System.out.println("Vælg et nr fra listen\n" + choice + " er ikke på listen");
 
@@ -324,6 +325,35 @@ public class UserInterface {
             } catch (DateTimeParseException e) {
                 System.out.println("\"" + input + "\" er ikke en gyldig dato. Skriv den som dd-mm-åååå.");
             }
+        }
+    }
+    private void sortAfter(){
+        System.out.println("Sorter efter: ");
+        System.out.println("1. Title");
+        System.out.println("2. Instruktør");
+        System.out.println("3. Årstal");
+        System.out.println("4. Længde");
+        System.out.println("5. Genre");
+
+        int choice = readInt("Vælg: ");
+
+        SortField field = switch (choice){
+            case 1 -> SortField.TITLE;
+            case 2 -> SortField.DIRECTOR;
+            case 3 -> SortField.YEAR;
+            case 4 -> SortField.LENGTH;
+            case 5 -> SortField.GENRE;
+            default -> {
+                System.out.println("Ugyldigt valgt");
+                yield null;
+            }
+        };
+        if(field == null){
+            return;
+        }
+        for(Movie movie : controller.getMoviesSortedBy(field)){
+            System.out.println(movie.printMovie());
+            System.out.println();
         }
     }
 }
