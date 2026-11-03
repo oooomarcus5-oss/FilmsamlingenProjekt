@@ -15,6 +15,9 @@ public class UserInterface {
     private Controller controller = new Controller();
     private boolean running = true;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+
+
     private String readNonEmpty(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -34,7 +37,7 @@ public class UserInterface {
             System.out.println("3. Søg efter film");
             System.out.println("4. Rediger en film");
             System.out.println("5. Slet en film");
-            System.out.println("6. Marker en film som set i dag");
+            System.out.println("6. Marker en film som set");
             System.out.println("7. Find film, du ikke har set længe");
             System.out.println("0. Afslut");
 
@@ -177,15 +180,16 @@ public class UserInterface {
             return;
         }
 
-     LocalDate date = readDate("Dato (dd-mm-åååå, Enter for i dag): ");
-        try {
-            controller.markAsWatched(movie, date);
-            System.out.println(movie.getTitle() + " er markeret som set den " + date.format(dateFormatter));
-        } catch (IllegalArgumentException e) {
-            System.out.println("filmen blev ikke markeret som set: " + e.getMessage());
-        }
-    }
+        LocalDate date = readDate("Dato (dd-mm-åååå, Enter for i dag): ");
 
+        if (date.isAfter(LocalDate.now())) {
+            System.out.println("Datoen ligger i fremtiden. Filmen er ikke markeret som set.");
+            return;
+        }
+
+        controller.markAsWatched(movie, date);
+        System.out.println(movie.getTitle() + " er markeret som set den " + date.format(dateFormatter));
+    }
     public void findMovieSinceDays() {
         int days = readInt("Hvor mange dage siden mindst? ");
         ArrayList<Movie> movies = controller.getMoviesNotWatchedForDays(days);
