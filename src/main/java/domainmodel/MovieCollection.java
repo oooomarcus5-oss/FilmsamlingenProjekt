@@ -1,5 +1,9 @@
+package domainmodel;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MovieCollection {
     private ArrayList<Movie> movies;
@@ -9,7 +13,12 @@ public class MovieCollection {
     }
 
     public void addMovie(String title, String director, int yearCreated, boolean inColor, int lengthInMinutes, String genre) {
-        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
+        addMovie(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
+    }
+
+    public void addMovie(Movie movie) {
+        movies.add(movie);
+        sortMovies();
     }
 
     public ArrayList<Movie> getMovies() {
@@ -35,17 +44,15 @@ public class MovieCollection {
         if (!movies.contains(movie)) {
             return false;
         }
-        new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre);
-
         movie.setTitle(title);
         movie.setDirector(director);
         movie.setYearCreated(yearCreated);
         movie.setInColor(inColor);
         movie.setLengthInMinutes(lengthInMinutes);
         movie.setGenre(genre);
+        sortMovies();
         return true;
     }
-
 
     public boolean deleteMovie(Movie movie) {
         return movies.remove(movie);
@@ -61,8 +68,18 @@ public class MovieCollection {
         return matches;
     }
 
-    public void addMovie(Movie movie){
-        movies.add(movie);
-
+    private void sortMovies() {
+        movies.sort((a, b) -> a.getTitle().compareToIgnoreCase(b.getTitle()));
     }
+    public ArrayList<Movie> getMoviesSortedByTitle() {
+        ArrayList<Movie> sorted = new ArrayList<>(movies);
+        Collections.sort(sorted);
+        return sorted;
+    }
+    public ArrayList<Movie> getMoviesSorted(Comparator<Movie> comparator) {
+        ArrayList<Movie> sorted = new ArrayList<>(movies);
+        sorted.sort(comparator);
+        return sorted;
+    }
+
 }
