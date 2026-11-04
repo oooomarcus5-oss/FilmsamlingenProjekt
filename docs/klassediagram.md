@@ -1,4 +1,4 @@
-classDiagram
+```mermaid classDiagram
     direction LR
 
     namespace ui {
@@ -127,5 +127,5 @@ classDiagram
     Comparator <|.. YearComparator : implements
     Comparator <|.. LengthComparator : implements
     Comparator <|.. GenreComparator : implements
-    Comparable <|.. Movie : implements
+    Comparable <|.. Movie : implements ```
 
